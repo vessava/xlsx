@@ -1,15 +1,19 @@
 {
-	"dependencies": {
-		"@types/node": "^17.0.42",
-		"xlsx": "^0.18.5"
-	},
-	"scripts": {
-		"test": "ts-node src/index.ts",
-		"build": "tsc",
-		"pkg": "npm run build && pkg -t node14-win out/index.js"
-	},
-	"devDependencies": {
-		"ts-node": "^10.8.1",
-		"typescript": "^4.7.3"
-	}
+  "dependencies": {
+    "@types/node": "^17.0.42",
+    "xlsx": "^0.18.5"
+  },
+  "scripts": {
+    "test:co": "ts-node src/collect.ts",
+    "test:cl": "ts-node src/classify.ts",
+    "build": "tsc",
+    "pkg:co": "npm run build && pkg -t node12-win out/collect.js",
+    "pkg:cl": "npm run build && pkg -t node12-win out/classify.js",
+    "pkg": "concurrently 'npm run pkg:cl' 'npm run pkg:co'"
+  },
+  "devDependencies": {
+    "concurrently": "^7.2.2",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
+  }
 }
