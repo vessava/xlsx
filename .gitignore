@@ -1,6 +1,7 @@
 /node_modules
 /out
 *.log
-*.xlsx
+/*.xlsx
 *.exe
-*.doc
+/*.doc
+/test
