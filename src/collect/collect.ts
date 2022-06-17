@@ -2,6 +2,7 @@ import XLSX from "xlsx";
 import fs from "fs";
 import path from "path";
 import { listDocFiles } from "../utils";
+import { Context } from "../context";
 
 main();
 
@@ -12,7 +13,7 @@ interface SheetItem {
 }
 
 async function main() {
-  const folders = await listFolder(process.cwd());
+  const folders = await listFolder(Context.PWD);
 
   const listPms = folders.map(async (folder) => {
     const root = folder.folderpath;
@@ -26,9 +27,13 @@ async function main() {
 
   const list = await Promise.all(listPms);
 
-  const final = list.flat().map(f => ({"人名": f.filename, "部门": f.foldername, "链接": f.filepath}));
+  const final = list
+    .flat()
+    .map((f) => ({ 人名: f.filename, 部门: f.foldername, 链接: f.filepath }));
 
-  const worksheet = XLSX.utils.json_to_sheet(final, { header: ["人名", "部门", "链接"] });
+  const worksheet = XLSX.utils.json_to_sheet(final, {
+    header: ["人名", "部门", "链接"],
+  });
   for (let key in worksheet) {
     if (key.startsWith("C") && parseInt(key.substring(1)) > 1) {
       const link = worksheet[key].v;
@@ -60,4 +65,3 @@ async function listFolder(dir: string): Promise<FolderObj[]> {
     .filter((o) => o.is)
     .map((o) => ({ foldername: o.foldername, folderpath: o.p }));
 }
-

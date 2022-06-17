@@ -6,7 +6,7 @@ import { ClassifyChecker } from "./checker";
 import { ClassifyStatistics } from "./statistics";
 import { StatisticsLogger } from "./logger";
 import { Logger } from "../log";
-import { PWD } from "../utils";
+import { Context } from "../context";
 
 process.on("uncaughtException", (e) => {
   logger.write(e.toString());
@@ -27,8 +27,10 @@ process.on("unhandledRejection", (reason) => {
 main();
 
 async function main() {
-  const map = new EmployeeMap(PWD);
-  const files = await listDocFiles(PWD);
+  const root = Context.PWD;
+
+  const map = new EmployeeMap(root);
+  const files = await listDocFiles(root);
 
   const statistics = new ClassifyStatistics();
   const checker = new ClassifyChecker(logger, statistics);
@@ -39,7 +41,7 @@ async function main() {
   const handleFile = async (file: FileObj) => {
     const name = file.filename.split(".")[0].trim();
     const depart = map.getDepartment(name) || "Unknown";
-    const departPath = path.join(PWD, depart);
+    const departPath = path.join(root, depart);
     const destPath = path.join(departPath, file.filename);
     return moveToDestFolder(departPath, file.filepath, destPath, logger);
 

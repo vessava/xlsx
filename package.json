@@ -5,8 +5,8 @@
     "xlsx": "^0.18.5"
   },
   "scripts": {
-    "test:co": "ts-node src/collect/collect.ts",
-    "test:cl": "ts-node src/classify/classify.ts",
+    "test:co": "NODE_ENV=development ts-node src/collect/collect.ts",
+    "test:cl": "NODE_ENV=development ts-node src/classify/classify.ts",
     "build": "tsc",
     "pkg:co": "npm run build && pkg -t node12-win out/collect/collect.js",
     "pkg:cl": "npm run build && pkg -t node12-win out/classify/classify.js",

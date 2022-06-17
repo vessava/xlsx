@@ -1,9 +1,7 @@
 import fs from "fs";
 import path from "path";
+import { Context } from "./context";
 import { TextLogger } from "./log";
-
-// export const PWD = process.cwd();
-export const PWD = './test';
 
 export interface FileObj {
   filename: string;
@@ -25,6 +23,6 @@ export async function listDocFiles(dir: string): Promise<FileObj[]> {
 }
 
 const LOG_NAME = "log.txt";
-const LOG_FILE = path.join(PWD, LOG_NAME);
+const LOG_FILE = path.join(Context.PWD, LOG_NAME);
 
 export const logger = new TextLogger(LOG_FILE);
