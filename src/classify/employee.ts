@@ -1,15 +1,14 @@
 
 import XLSX from "xlsx"
 import path from "path";
-const referenceFile = "ref.xlsx";
+
+const REFERENCE_FILE = "ref.xlsx";
 const DUPLICATE_DEPART_NAME = "Duplicate";
 
 export class EmployeeMap {
-
   private readonly map;
-
   constructor(root: string) {
-    const file = path.join(root, referenceFile);
+    const file = path.join(root, REFERENCE_FILE);
     this.map = createMap(file)
   }
 

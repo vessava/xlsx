@@ -1,15 +1,16 @@
 {
   "dependencies": {
     "@types/node": "^17.0.42",
+    "pkg": "^5.7.0",
     "xlsx": "^0.18.5"
   },
   "scripts": {
-    "test:co": "ts-node src/collect.ts",
-    "test:cl": "ts-node src/classify.ts",
+    "test:co": "ts-node src/collect/collect.ts",
+    "test:cl": "ts-node src/classify/classify.ts",
     "build": "tsc",
-    "pkg:co": "npm run build && pkg -t node12-win out/collect.js",
-    "pkg:cl": "npm run build && pkg -t node12-win out/classify.js",
-    "pkg": "concurrently 'npm run pkg:cl' 'npm run pkg:co'"
+    "pkg:co": "npm run build && pkg -t node12-win out/collect/collect.js",
+    "pkg:cl": "npm run build && pkg -t node12-win out/classify/classify.js",
+    "pkg": "npm run pkg:co && npm run pkg:cl"
   },
   "devDependencies": {
     "concurrently": "^7.2.2",

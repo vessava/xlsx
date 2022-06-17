@@ -1,7 +1,7 @@
 import XLSX from "xlsx";
 import fs from "fs";
 import path from "path";
-import { listDocFiles } from "./utils";
+import { listDocFiles } from "../utils";
 
 main();
 
